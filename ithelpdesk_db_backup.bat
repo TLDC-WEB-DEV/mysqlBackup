@@ -15,15 +15,19 @@ REM Ensure the backup directory exists, create it if not
 if not exist "%BACKUP_DIR%" mkdir "%BACKUP_DIR%"
 REM pause
 REM echo %current_date%
-set host=
-set user=
-set pass=
-set db[0]=db1
-set db[1]=db2
-set db[2]=db3
-set db[3]=db4
-set db[4]=db5
-set db[5]=db6
+
+set host="<host>"
+set user="<username>"
+@REM If password has a % sign, double the % sign
+@REM Example: "pass%ord" should be "pass%%ord"
+set pass="<password>"
+set db[0]=<db0>
+set db[1]=<db1>
+set db[2]=<db2>
+set db[3]=<db3>
+set db[4]=<db4>
+set db[5]=<db5>
+
 
 REM pause
 for /l %%n in (0,1,5) do ( 
@@ -31,12 +35,13 @@ for /l %%n in (0,1,5) do (
 	set BACKUP_FILE=!BACKUP_DIR!\backup_!db[%%n]!.sql
 	REM pause
 	set LOG_FILE=!BACKUP_DIR!\backup_!db[%%n]!.log
- 
+
 	REM echo !db[%%n]!
 	REM pause
 	REM pause
-	echo "mysqldump -h!host! -u!user! -p!pass! --verbose !db[%%n]!  > "!BACKUP_FILE!" 2> "!LOG_FILE!"
+	@REM echo "mysqldump -h!host! -u!user! -p!pass! --verbose !db[%%n]!  > "!BACKUP_FILE!" 2> "!LOG_FILE!"
     mysqldump -h!host! -u!user! -p!pass! --verbose !db[%%n]!  > "!BACKUP_FILE!" 2> "!LOG_FILE!"
+
 	REM pause
 )
 
@@ -46,39 +51,3 @@ echo "MYSQL Backup for %host% completed!.."
 echo "Backup Location: %BACKUP_DIR%"
 pause
 
-REM | information_schema |
-REM | calltracker        |
-REM | custcarev2         |
-REM | hrservicedesk      |
-REM | legalconcerns      |
-REM | marketingrequest   |
-REM | mysql              |
-REM | performance_schema |
-REM | sys                |
-REM | tldchesk           |
-
-REM Count the number of databases in the array
-REM for /f %%a in ('echo !DATABASE_NAMES! ^| find /c /v ""') do set "DB_COUNT=%%a"
-
-REM echo %DB_COUNT%
-
-
-REM Loop through the array and perform database backups
-REM for /L %%i in (0, 1, %DB_COUNT%) do (
-    REM set "DB_NAME=!DATABASE_NAMES[%%i]!"
-	REM echo %DB_NAME%
-    REM set "BACKUP_FILE=%BACKUP_DIR%\backup_!DB_NAME!.sql"
-    REM set "LOG_FILE=%BACKUP_DIR%\backup_!DB_NAME!.log"
-    
-    REM echo Backing up database '!DB_NAME!' to !BACKUP_FILE!...
-    REM mysqldump -u%MYSQL_USER% -p%MYSQL_PASSWORD% --verbose "!DB_NAME!" > "!BACKUP_FILE!" 2
-
-    REM Check the mysqldump exit code
-    REM if !errorlevel! neq 0 (
-        REM echo Error: Database backup for '!DB_NAME!' failed. See log file: !LOG_FILE!
-    REM ) else (
-        REM echo Database backup for '!DB_NAME!' completed successfully. Log file: !LOG_FILE!
-    REM )
-REM )
-
-REM pause
