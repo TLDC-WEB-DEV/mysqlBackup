@@ -15,15 +15,15 @@ REM Ensure the backup directory exists, create it if not
 if not exist "%BACKUP_DIR%" mkdir "%BACKUP_DIR%"
 REM pause
 REM echo %current_date%
-set host=192.168.250.78
-set user=ithelpdesk
-set pass=1ntrud3r
-set db[0]=calltracker
-set db[1]=custcarev2
-set db[2]=hrservicedesk
-set db[3]=legalconcerns
-set db[4]=marketingrequest
-set db[5]=tldchesk
+set host=
+set user=
+set pass=
+set db[0]=db1
+set db[1]=db2
+set db[2]=db3
+set db[3]=db4
+set db[4]=db5
+set db[5]=db6
 
 REM pause
 for /l %%n in (0,1,5) do ( 
