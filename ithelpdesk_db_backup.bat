@@ -15,6 +15,7 @@ REM Ensure the backup directory exists, create it if not
 if not exist "%BACKUP_DIR%" mkdir "%BACKUP_DIR%"
 REM pause
 REM echo %current_date%
+
 set host="<host>"
 set user="<username>"
 @REM If password has a % sign, double the % sign
@@ -26,6 +27,7 @@ set db[2]=<db2>
 set db[3]=<db3>
 set db[4]=<db4>
 set db[5]=<db5>
+
 
 REM pause
 for /l %%n in (0,1,5) do ( 
