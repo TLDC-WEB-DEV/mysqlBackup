@@ -40,7 +40,7 @@ for /l %%n in (0,1,5) do (
 	REM pause
 	REM pause
 	@REM echo "mysqldump -h!host! -u!user! -p!pass! --verbose !db[%%n]!  > "!BACKUP_FILE!" 2> "!LOG_FILE!"
-    mysqldump -h!host! -u!user! -p!pass! --verbose !db[%%n]!  > "!BACKUP_FILE!" 2> "!LOG_FILE!"
+	"%~dp0"mysqldump -h!host! -u!user! -p!pass! --verbose !db[%%n]!  > "!BACKUP_FILE!" 2> "!LOG_FILE!"
 
 	REM pause
 )
